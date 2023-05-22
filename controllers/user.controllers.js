@@ -56,6 +56,36 @@ const userDelete = async (req,res) => {
 //PUT (ACTUALIZAR)
 
 
+const userUpdate = async (req,res) => {
+    const {id} = req.params;
+    const { modelo,name,serial,cost} = req.body
+
+    await userModel.findByIdAndUpdate(id,{
+        modelo:modelo,
+        name:name,
+        serial:serial,
+        cost:cost
+        
+    });
+
+
+
+    res
+    .status(200)
+    .json({
+        message: ' Actualizado correctamente'
+    })
+    .send()
+}
+
+module.exports ={
+    getUsers,
+    createUser,
+    userDelete,
+    userUpdate
+}
+
+
 
 
 

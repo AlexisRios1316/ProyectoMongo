@@ -1,4 +1,5 @@
 const express = require('express'); // imports en node js sin ninguna configuracion 
+const {getUsers,createUser,userDelete,userUpdate} = require ('./controllers/user.controllers')
  const app  = express();
  const mongoose = require('mongoose');  //Para realizar la conexion al mongoose 
  require('dotenv').config() // Importamos dotenv
@@ -13,6 +14,14 @@ console.log('Conexion a mongo DB')
 }).catch((error) => {
     console.log(error)
 })
+
+
+
+app.get('/user',getUsers);
+app.post('/user',createUser);
+app.put('/user/:id',userUpdate);
+app.delete('/user/:id',userDelete);
+
 
 
 // Servidor 
