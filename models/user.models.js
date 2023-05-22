@@ -1,4 +1,4 @@
-const {Schema,model, Model} = require('mongoose')  //Para importar los modelos 
+const {Schema,model, model} = require('mongoose')  //Para importar los modelos 
 
 //Esquema
 const userSchema = new Schema({
@@ -20,7 +20,6 @@ const userSchema = new Schema({
     }
 });
 
-const userModel = Model('user_producto', userSchema);
+const userModel = model('user_producto', userSchema);
 
 module.exports = userModel;
-
