@@ -1,4 +1,4 @@
-const {Schema,model, model} = require('mongoose')  //Para importar los modelos 
+const {Schema,model} = require('mongoose')  //Para importar los modelos 
 
 //Esquema
 const userSchema = new Schema({
@@ -12,7 +12,7 @@ const userSchema = new Schema({
     },
     serial:{
         type:String,
-        required:true
+       
     },
     cost:{
         type:Number,
