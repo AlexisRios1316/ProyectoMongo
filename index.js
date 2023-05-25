@@ -4,9 +4,15 @@ const {getUsers,createUser,userDelete,userUpdate} = require ('./controllers/user
  const mongoose = require('mongoose');  //Para realizar la conexion al mongoose 
  require('dotenv').config() // Importamos dotenv
  const port = process.env.PORT || 3000;
-
+const cors = require('cors') // importamos el cors
  //Configuracion para recibir inofmracion 
  app.use(express.json()) //´Permite que la peticion post reciba informacion
+
+
+
+ //Uso del cors
+app.use(cors({origin:'*'}));
+
 
 //Conexion a Mongoose 
 mongoose.connect(process.env.HOSTDB).then(() => {
