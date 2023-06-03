@@ -2,21 +2,13 @@ const {Schema,model} = require('mongoose')  //Para importar los modelos
 
 //Esquema
 const userSchema = new Schema({
-    modelo:{
+    users:{
         type:String,
        
     },
-    name:{
+    password:{
         type:String,
        
-    },
-    serial:{
-        type:String,
-       
-    },
-    cost:{
-        type:Number,
-     
     }
 });
 
