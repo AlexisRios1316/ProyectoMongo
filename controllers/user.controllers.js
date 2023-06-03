@@ -17,20 +17,19 @@ const getUsers = async (req,res) =>{
 
 //POST  (CREAR)
 const createUser = async (req,res) =>{
-const { modelo,name,serial,cost} = req.body
+const { users,password} = req.body
 
     const user = new userModel({
-        modelo:modelo,
-        name:name,
-        serial:serial,
-        cost:cost
+        users:users,
+        password:password,
+       
 
     })
     await user.save()
     res
     .status(201)  //201 = create 
     .json({
-        message:'Producto Registrado correctamente'
+        message:'Usuario registrado coerrectamente '
     })
     .send()
     
@@ -58,13 +57,12 @@ const userDelete = async (req,res) => {
 
 const userUpdate = async (req,res) => {
     const {id} = req.params;
-    const { modelo,name,serial,cost} = req.body
+    const { users,password} = req.body
 
     await userModel.findByIdAndUpdate(id,{
-        modelo:modelo,
-        name:name,
-        serial:serial,
-        cost:cost
+        users:users,
+        password:password
+        
         
     });
 
