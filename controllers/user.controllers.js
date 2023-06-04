@@ -29,7 +29,7 @@ const { users,password} = req.body
     res
     .status(201)  //201 = create 
     .json({
-        message:'Usuario registrado coerrectamente '
+        message:'Acceso correctamente '
     })
     .send()
     
@@ -62,7 +62,7 @@ const userUpdate = async (req,res) => {
     await userModel.findByIdAndUpdate(id,{
         users:users,
         password:password
-        
+
         
     });
 
