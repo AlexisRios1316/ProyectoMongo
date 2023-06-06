@@ -1,4 +1,6 @@
 const userModel = require('../models/user.models');
+const bcrypt = require('bcrypt');
+const { generateJWT } = require('../utils/jwt');
 //Creando nuestro crud
 
 //GET (OBTENER)
@@ -19,6 +21,8 @@ const getUsers = async (req,res) =>{
 const createUser = async (req,res) =>{
 const { users,password} = req.body
 
+const hash = bcrypt.hashSync(password, 10);
+
     const user = new userModel({
         users:users,
         password:password,
@@ -29,7 +33,7 @@ const { users,password} = req.body
     res
     .status(201)  //201 = create 
     .json({
-        message:'Acceso correctamente '
+        message:' Usuario Creado'
     })
     .send()
     
@@ -76,11 +80,65 @@ const userUpdate = async (req,res) => {
     .send()
 }
 
+
+
+
+
+
+// Login / Post 
+const login = async (req, res) => {
+
+    const { users, password } = req.body;
+
+    const user = await userModel.findOne({ users:users });
+
+    if (!user) {
+        return res
+                .status(404)
+                .json({
+                    message: 'Usuario no encontrado'
+                })
+                .send()
+    }
+
+    console.log(password, user.password);
+
+    const isMatch = bcrypt.compareSync(password, user.password);
+
+    if (isMatch) {
+        const token = generateJWT(user._id);
+
+        return res
+                .status(200)
+                .json({
+                    message: 'Usuario logeado correctamente',
+                    user: {
+                        age: user.age,
+                        users: user.users
+                    },
+                    token: token
+                })
+                .send()
+    } else {
+        return res
+                .status(401)
+                .json({
+                   message: 'Usuario incorrecto'
+                })
+                .send()
+    }
+
+}
+
+
+
+
 module.exports ={
     getUsers,
     createUser,
     userDelete,
-    userUpdate
+    userUpdate,
+    login
 }
 
 
