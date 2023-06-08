@@ -25,7 +25,7 @@ const hash = bcrypt.hashSync(password, 10);
 
     const user = new userModel({
         users:users,
-        password:password,
+        password:hash,
        
 
     })
@@ -90,7 +90,7 @@ const login = async (req, res) => {
 
     const { users, password } = req.body;
 
-    const user = await userModel.findOne({ users:users, password:password });
+    const user = await userModel.findOne({ users:users });
 
     if (!user) {
         return res
@@ -102,17 +102,9 @@ const login = async (req, res) => {
     }
     else
     {
-        return res
-        .status(200)
-        .json({
-            message: 'Usuario correcto'
-        })
-        .send()
-    }
+        console.log(password, user.password);
 
-    console.log(password, user.password);
-
-  /*  const isMatch = bcrypt.compareSync(password, user.password);
+    const isMatch = bcrypt.compareSync(password, user.password);
 
     if (isMatch) {
         const token = generateJWT(user._id);
@@ -136,7 +128,10 @@ const login = async (req, res) => {
                 })
                 .send()
     }
-    */
+    
+    }
+
+   
 
 }
 
