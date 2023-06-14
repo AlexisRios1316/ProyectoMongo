@@ -11,7 +11,7 @@ const cors = require('cors') // importamos el cors
 
 
  //Uso del cors
-app.use(cors({origin:'*'}));
+app.use(cors());
 
 
 //Conexion a Mongoose 

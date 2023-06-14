@@ -98,7 +98,7 @@ const login = async (req, res) => {
                 .json({
                     message: 'Usuario no encontrado'
                 })
-                .send()
+                
     }
     else
     {
