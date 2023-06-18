@@ -4,7 +4,7 @@ const generateJWT = (id) => {
 
     const secret = process.env.SECRET_TOKEN;
 
-    return jwt.sign({
+    return jwt.sign({      
         id: id
     }, secret, { expiresIn: '8h' });
 
